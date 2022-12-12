@@ -97,8 +97,8 @@ accelerator:
       required: true
     - name: enableAppConfigService
       description: "If set to true, application will be configured to use Application Configuration Service for external configuration"
-      label: Enable Application Configuration Service
-      datatype: boolean
+      label: Enable Application Configuration Service?
+      dataType: boolean
       defaultValue: true
       inputType: checkbox
       required: true
