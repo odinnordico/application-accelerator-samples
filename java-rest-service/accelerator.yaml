@@ -188,40 +188,34 @@ engine:
                 with: "''"
     # end of the Gradle specific part
 
-  # ACS is enabled
+    # ACS is enabled
     - condition: "#acsEnabled"
       merge:
         - include: ['README.md']
           chain:
             - type: ReplaceText
               substitutions:
-                - text: "--- ACS Config ---"
-                  with: "
-### Enable External Configuration
-Define Git Repository in Application Configuration Service:
-
-  ```shell
-  az spring application-configuration-service git repo add \
-  --name \"#artifactId-config\" \
-  --label \"#acsRepoLabel\" \
-  --patterns \"#acsRepoPattern\" \
-  --uri \"#acsRepoUri\"
-  ```
-
-Bind the application to Application Configuration Service to enable external configuration loading:
-
-  ```shell
-  az spring application-configuration-service bind --app ${SERVICE_APP}
-  ```
-
-Configure the config file patterns for the application:
-
-
-  ```shell
-  az spring app update --config-file-patterns \"#acsRepoPattern\"
-  ```
-"
-      # end of ACS specific part
+                - text: acs-repo-uri
+                  with: "#acsRepoUri"
+                - text: acs-repo-label
+                  with: "#acsRepoLabel"
+                - text: acs-repo-pattern
+                  with: "acsRepoPattern"
+                - text: app-config-name
+                  with: "#artifactId-config"
+            - type: ReplaceText
+              regex:
+                - pattern: "--- StartACS\\s|--- EndACS\\s"
+                  with: "''"
+    - condition: "#acsEnabled == 'false'"
+      merge:
+        - include: ['README.md']
+          chain:
+            - type: ReplaceText
+              regex:
+                - pattern: "--- StartACS[\\s\\S]+?--- EndACS"
+                  with: "''"
+    # end of ACS specific part
     # Flyway is selected
     - condition: "#databaseMigrationTool == 'flyway'"
       exclude: [ "src/main/resources/db/**" ]
