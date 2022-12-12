@@ -165,6 +165,9 @@ az spring app create --name ${SERVICE_APP} \
 ```
 > Note: The app will take around 2-3 minutes to create.
 
+--- ACS Config ---
+
+
 ### Build and Deploy the Application
 
 Deploy and build the application, specifying its required parameters

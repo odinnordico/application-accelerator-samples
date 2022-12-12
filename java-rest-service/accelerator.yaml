@@ -95,6 +95,39 @@ accelerator:
       label: Database Instance Name
       description: The name of the database instance this application will use (can be existing one in the cluster)
       required: true
+    - name: enableAppConfigService
+      description: "If set to true, application will be configured to use Application Configuration Service for external configuration"
+      label: Enable Application Configuration Service
+      datatype: boolean
+      defaultValue: false
+      inputType: checkbox
+      required: true
+    - name: acsRepoUri
+      description: "Git Repository URI containing external configuration"
+      inputType: text
+      label: Git Repository URI
+      required: true
+      dependsOn:
+        name: enableAppConfigService
+        value: true
+    - name: acsRepoLabel
+      description: "Git Repository Branch name containing external configuration"
+      label: Git Repository Label
+      datatype: text
+      defaultValue: main
+      required: true
+      dependsOn:
+        name: enableAppConfigService
+        value: true
+    - name: acsRepoPattern
+      description: "Pattern used to search in Git repositories"
+      label: Git Repository Pattern
+      datatype: text
+      defaultValue: "application/default"
+      required: true
+      dependsOn:
+        name: enableAppConfigService
+        value: true
 
 engine:
   let:
@@ -154,6 +187,41 @@ engine:
                 pattern: "--- StartGradle\\s|--- EndGradle\\s"
                 with: "''"
     # end of the Gradle specific part
+
+    # ACS is enabled
+    - condition: "#acsEnabled"
+      merge:
+        - include: ['README.md']
+          chain:
+            - type: ReplaceText
+              substitutions:
+                - text: "--- ACS Config ---"
+                  with: |
+### Enable External Configuration
+Define Git Repository in Application Configuration Service:
+
+  ```shell
+  az spring application-configuration-service git repo add \
+  --name "#artifactId-config" \
+  --label "#acsRepoLabel" \
+  --patterns "#acsRepoPattern" \
+  --uri "#acsRepoUri"
+  ```
+
+Bind the application to Application Configuration Service to enable external configuration loading:
+
+  ```shell
+  az spring application-configuration-service bind --app ${SERVICE_APP}
+  ```
+
+Configure the config file patterns for the application:
+
+
+  ```shell
+  az spring app update --config-file-patterns "#acsRepoPattern"
+  ```
+
+    # end of ACS specific part
 
     # Flyway is selected
     - condition: "#databaseMigrationTool == 'flyway'"
