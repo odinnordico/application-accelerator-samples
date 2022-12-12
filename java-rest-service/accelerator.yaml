@@ -189,14 +189,14 @@ engine:
     # end of the Gradle specific part
 
   # ACS is enabled
-  - condition: "#acsEnabled"
-    merge:
-      - include: ['README.md']
-        chain:
-          - type: ReplaceText
-            substitutions:
-              - text: "--- ACS Config ---"
-                with: "
+    - condition: "#acsEnabled"
+      merge:
+        - include: ['README.md']
+          chain:
+            - type: ReplaceText
+              substitutions:
+                - text: "--- ACS Config ---"
+                  with: "
 ### Enable External Configuration
 Define Git Repository in Application Configuration Service:
 
@@ -222,7 +222,6 @@ Configure the config file patterns for the application:
   ```
 "
       # end of ACS specific part
-
     # Flyway is selected
     - condition: "#databaseMigrationTool == 'flyway'"
       exclude: [ "src/main/resources/db/**" ]
