@@ -102,32 +102,32 @@ accelerator:
       defaultValue: true
       inputType: checkbox
       required: true
-#    - name: acsRepoUri
-#      description: "Git Repository URI containing external configuration"
-#      inputType: text
-#      label: Git Repository URI
-#      required: true
-#      dependsOn:
-#        name: enableAppConfigService
-#        value: true
-#    - name: acsRepoLabel
-#      description: "Git Repository Branch name containing external configuration"
-#      label: Git Repository Label
-#      datatype: text
-#      defaultValue: main
-#      required: true
-#      dependsOn:
-#        name: enableAppConfigService
-#        value: true
-#    - name: acsRepoPattern
-#      description: "Pattern used to search in Git repositories"
-#      label: Git Repository Pattern
-#      datatype: text
-#      defaultValue: "application/default"
-#      required: true
-#      dependsOn:
-#        name: enableAppConfigService
-#        value: true
+    - name: acsRepoUri
+      description: "Git Repository URI containing external configuration"
+      inputType: text
+      label: Git Repository URI
+      required: true
+      dependsOn:
+        name: enableAppConfigService
+        value: true
+    - name: acsRepoLabel
+      description: "Git Repository Branch name containing external configuration"
+      label: Git Repository Label
+      datatype: text
+      defaultValue: main
+      required: true
+      dependsOn:
+        name: enableAppConfigService
+        value: true
+    - name: acsRepoPattern
+      description: "Pattern used to search in Git repositories"
+      label: Git Repository Pattern
+      datatype: text
+      defaultValue: "application/default"
+      required: true
+      dependsOn:
+        name: enableAppConfigService
+        value: true
 
 engine:
   let:
