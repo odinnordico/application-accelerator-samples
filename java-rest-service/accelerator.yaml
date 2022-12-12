@@ -120,8 +120,8 @@ accelerator:
         name: enableAppConfigService
         value: true
     - name: acsRepoPattern
-      description: "Pattern used to search in Git repositories"
-      label: Git Repository Pattern
+      description: "Pattern used to search in Git repositories. For each pattern, use format like {application} or {application}/{profile} instead of {application}-{profile}.yml, and separate them by a comma."
+      label: Application Configuration Pattern
       datatype: text
       defaultValue: "application/default"
       required: true
@@ -188,7 +188,40 @@ engine:
                 with: "''"
     # end of the Gradle specific part
 
+  # ACS is enabled
+  - condition: "#acsEnabled"
+    merge:
+      - include: ['README.md']
+        chain:
+          - type: ReplaceText
+            substitutions:
+              - text: "--- ACS Config ---"
+                with: "
+### Enable External Configuration
+Define Git Repository in Application Configuration Service:
 
+  ```shell
+  az spring application-configuration-service git repo add \
+  --name \"#artifactId-config\" \
+  --label \"#acsRepoLabel\" \
+  --patterns \"#acsRepoPattern\" \
+  --uri \"#acsRepoUri\"
+  ```
+
+Bind the application to Application Configuration Service to enable external configuration loading:
+
+  ```shell
+  az spring application-configuration-service bind --app ${SERVICE_APP}
+  ```
+
+Configure the config file patterns for the application:
+
+
+  ```shell
+  az spring app update --config-file-patterns \"#acsRepoPattern\"
+  ```
+"
+      # end of ACS specific part
 
     # Flyway is selected
     - condition: "#databaseMigrationTool == 'flyway'"
