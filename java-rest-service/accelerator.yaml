@@ -202,18 +202,18 @@ engine:
                   with: "acsRepoPattern"
                 - text: app-config-name
                   with: "#artifactId-config"
-            - type: ReplaceText
-              regex:
-                - pattern: "--- StartACS\\s|--- EndACS\\s"
-                  with: "''"
-    - condition: "#acsEnabled == 'false'"
-      merge:
-        - include: ['README.md']
-          chain:
-            - type: ReplaceText
-              regex:
-                - pattern: "--- StartACS[\\s\\S]+?--- EndACS"
-                  with: "''"
+#            - type: ReplaceText
+#              regex:
+#                - pattern: "--- StartACS\\s|--- EndACS\\s"
+#                  with: "''"
+#    - condition: "#acsEnabled == 'false'"
+#      merge:
+#        - include: ['README.md']
+#          chain:
+#            - type: ReplaceText
+#              regex:
+#                - pattern: "--- StartACS[\\s\\S]+?--- EndACS"
+#                  with: "''"
     # end of ACS specific part
     # Flyway is selected
     - condition: "#databaseMigrationTool == 'flyway'"
