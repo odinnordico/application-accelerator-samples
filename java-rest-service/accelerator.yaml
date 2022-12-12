@@ -199,13 +199,13 @@ engine:
                 - text: acs-repo-label
                   with: "#acsRepoLabel"
                 - text: acs-repo-pattern
-                  with: "acsRepoPattern"
+                  with: "#acsRepoPattern"
                 - text: app-config-name
                   with: "#artifactId-config"
-#            - type: ReplaceText
-#              regex:
-#                - pattern: "--- StartACS\\s|--- EndACS\\s"
-#                  with: "''"
+            - type: ReplaceText
+              regex:
+                - pattern: "--- StartACS\\s|--- EndACS\\s"
+                  with: "''"
 #    - condition: "#acsEnabled == 'false'"
 #      merge:
 #        - include: ['README.md']
