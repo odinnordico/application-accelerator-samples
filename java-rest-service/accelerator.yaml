@@ -208,14 +208,14 @@ engine:
               regex:
                   pattern: "--- StartACS\\s|--- EndACS\\s"
                   with: "''"
-#    - condition: "#acsEnabled == 'false'"
-#      merge:
-#        - include: ['README.md']
-#          chain:
-#            - type: ReplaceText
-#              regex:
-#                - pattern: "--- StartACS[\\s\\S]+?--- EndACS"
-#                  with: "''"
+    - condition: "#acsEnabled == 'false'"
+      merge:
+        - include: ['README.md']
+          chain:
+            - type: ReplaceText
+              regex:
+                  pattern: "--- StartACS[\\s\\S]+?--- EndACS"
+                  with: "''"
     # end of ACS specific part
     # Flyway is selected
     - condition: "#databaseMigrationTool == 'flyway'"
