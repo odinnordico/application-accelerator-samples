@@ -206,7 +206,7 @@ engine:
           chain:
             - type: ReplaceText
               regex:
-                - pattern: "--- StartACS\\s|--- EndACS\\s"
+                  pattern: "--- StartACS\\s|--- EndACS\\s"
                   with: "''"
 #    - condition: "#acsEnabled == 'false'"
 #      merge:
