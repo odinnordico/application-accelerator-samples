@@ -202,6 +202,8 @@ engine:
                   with: "#acsRepoPattern"
                 - text: app-config-name
                   with: "#artifactId-config"
+        - include: ['README.md']
+          chain:
             - type: ReplaceText
               regex:
                 - pattern: "--- StartACS\\s|--- EndACS\\s"
