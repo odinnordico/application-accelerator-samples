@@ -187,7 +187,6 @@ engine:
                 pattern: "--- StartGradle\\s|--- EndGradle\\s"
                 with: "''"
     # end of the Gradle specific part
-
     # ACS is enabled
     - condition: "#acsEnabled"
       merge:
