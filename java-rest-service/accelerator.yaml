@@ -99,7 +99,7 @@ accelerator:
       description: "If set to true, application will be configured to use Application Configuration Service for external configuration"
       label: Enable Application Configuration Service
       datatype: boolean
-      defaultValue: false
+      defaultValue: true
       inputType: checkbox
       required: true
     - name: acsRepoUri
