@@ -188,7 +188,7 @@ engine:
                 with: "''"
     # end of the Gradle specific part
     # ACS is enabled
-    - condition: "#acsEnabled"
+    - condition: "#enableAppConfigService"
       merge:
         - include: ['README.md']
           chain:
@@ -208,7 +208,7 @@ engine:
               regex:
                   pattern: "--- StartACS\\s|--- EndACS\\s"
                   with: "''"
-    - condition: "#acsEnabled == 'false'"
+    - condition: "#enableAppConfigService == 'false'"
       merge:
         - include: ['README.md']
           chain:
