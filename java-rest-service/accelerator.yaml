@@ -196,26 +196,26 @@ engine:
               substitutions:
                 - text: "acs-repo-uri"
                   with: "#acsRepoUri"
-                - text: "acs-repo-label"
-                  with: "#acsRepoLabel"
-                - text: "acs-repo-pattern"
-                  with: "#acsRepoPattern"
-                - text: "app-config-name"
-                  with: "#artifactId-config"
-        - include: ['README.md']
-          chain:
-            - type: ReplaceText
-              regex:
-                  pattern: "--- StartACS\\s|--- EndACS\\s"
-                  with: "''"
-    - condition: "#enableAppConfigService == 'false'"
-      merge:
-        - include: ['README.md']
-          chain:
-            - type: ReplaceText
-              regex:
-                  pattern: "--- StartACS[\\s\\S]+?--- EndACS"
-                  with: "''"
+#                - text: "acs-repo-label"
+#                  with: "#acsRepoLabel"
+#                - text: "acs-repo-pattern"
+#                  with: "#acsRepoPattern"
+#                - text: "app-config-name"
+#                  with: "#artifactId-config"
+#        - include: ['README.md']
+#          chain:
+#            - type: ReplaceText
+#              regex:
+#                  pattern: "--- StartACS\\s|--- EndACS\\s"
+#                  with: "''"
+#    - condition: "#enableAppConfigService == 'false'"
+#      merge:
+#        - include: ['README.md']
+#          chain:
+#            - type: ReplaceText
+#              regex:
+#                  pattern: "--- StartACS[\\s\\S]+?--- EndACS"
+#                  with: "''"
     # end of ACS specific part
     # Flyway is selected
     - condition: "#databaseMigrationTool == 'flyway'"
